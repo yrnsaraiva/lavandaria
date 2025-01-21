@@ -1,0 +1,1 @@
+web: gunicorn Lavandaria.wsgi:application --log-file -

@@ -1,0 +1,63 @@
+{% extends 'unfold/layouts/base.html' %}
+
+{% load i18n unfold %}
+
+{% block breadcrumbs %}{% endblock %}
+
+{% block title %}
+    Dashboard
+{% endblock %}
+
+{% block content %}
+    {% component "unfold/components/container.html" %}
+
+        <!-- KPIs -->
+        {% component "unfold/components/flex.html" with class="gap-8 mb-8 flex-col lg:flex-row" %}
+            {% for card in kpis %}
+                {% component "unfold/components/card.html" with class="lg:w-1/3" %}
+                    {% component "unfold/components/text.html" %}
+                        {{ card.title }}
+                    {% endcomponent %}
+
+                    {% component "unfold/components/title.html" %}
+                        {{ card.metric }}
+                    {% endcomponent %}
+                {% endcomponent %}
+            {% endfor %}
+        {% endcomponent %}
+
+        <!-- Charts -->
+        {% component "unfold/components/flex.html" with class="gap-8 mb-8 flex-col lg:flex-row" %}
+
+            <!-- Gráfico de Pedidos Diários -->
+            {% component "unfold/components/card.html" with class="lg:w-1/2" %}
+                {% component "unfold/components/title.html" %}
+                    Pedidos Diários
+                {% endcomponent %}
+                {% component "unfold/components/text.html" %}
+                    Últimos 7 dias
+                {% endcomponent %}
+                {% component "unfold/components/chart/line.html" with data=dauChartData %}{% endcomponent %}
+            {% endcomponent %}
+
+            <!-- Gráfico de Receita por Dia -->
+            {% component "unfold/components/card.html" with class="lg:w-1/2" %}
+                {% component "unfold/components/title.html" %}
+                    Receita Diária
+                {% endcomponent %}
+                {% component "unfold/components/text.html" %}
+                    Últimos 7 dias
+                {% endcomponent %}
+                {% component "unfold/components/chart/line.html" with data=dpsChartData %}{% endcomponent %}
+            {% endcomponent %}
+        {% endcomponent %}
+
+        <!-- Tabela de Lavandarias e Pedidos -->
+        {% component "unfold/components/flex.html" with class="gap-8 mb-8 flex-col lg:flex-row" %}
+            {% component "unfold/components/card.html" with title="Resumo das Lavandarias" %}
+                {% component "unfold/components/table.html" with table=table card_included=1 striped=0 %}{% endcomponent %}
+            {% endcomponent %}
+        {% endcomponent %}
+
+    {% endcomponent %}
+{% endblock %}
