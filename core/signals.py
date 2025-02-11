@@ -1,15 +1,8 @@
-from django.db.models.signals import post_save, post_delete
+from django.db.models.signals import post_migrate
 from django.dispatch import receiver
-from .models import ItemPedido
+from .models import criar_grupos_com_permissoes
 
 
-# Atualizar o total do pedido ao adicionar ou modificar um item
-@receiver(post_save, sender=ItemPedido)
-def atualizar_total_apos_salvar(sender, instance, **kwargs):
-    instance.pedido.calcular_total()
-
-
-# Atualizar o total do pedido ao excluir um item
-@receiver(post_delete, sender=ItemPedido)
-def atualizar_total_apos_excluir(sender, instance, **kwargs):
-    instance.pedido.calcular_total()
+@receiver(post_migrate)
+def criar_grupos_apos_migracao(sender, **kwargs):
+    criar_grupos_com_permissoes()

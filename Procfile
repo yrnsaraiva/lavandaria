@@ -1,1 +1,1 @@
-web: gunicorn Lavandaria.wsgi:application --log-file -
+web: gunicorn powerWashing.wsgi:application --log-file -
