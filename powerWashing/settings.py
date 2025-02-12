@@ -17,7 +17,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-!)kk^js_66cyvlsn4dog9-4amy%il#u8l+wnju5ec9kdpy8v&^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -91,9 +91,9 @@ DATABASES = {
     }
 }
 #
-POSTGRES_LOCALLY = False
-if not DEBUG or POSTGRES_LOCALLY:
-    DATABASES['default'] = dj_database_url.parse('postgresql://postgres:BhBJVGJptzwEKPrbZbyTuvumiSsflzoa@junction.proxy.rlwy.net:38981/railway')
+# POSTGRES_LOCALLY = False
+# if not DEBUG or POSTGRES_LOCALLY:
+#     DATABASES['default'] = dj_database_url.parse('postgresql://postgres:BhBJVGJptzwEKPrbZbyTuvumiSsflzoa@junction.proxy.rlwy.net:38981/railway')
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
