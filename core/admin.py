@@ -105,7 +105,7 @@ def enviar_sms_mozesms(numero, mensagem):
     Envia um SMS usando a API Mozesms.
     """
     payload = {
-        'sender': 'ESHOP',
+        'sender': 'POWERWASH',
         'messages': [{
             'number': numero,
             'text': mensagem,
@@ -227,3 +227,4 @@ class ItemPedidoAdmin(ModelAdmin):
     list_filter = ('servico',)
     readonly_fields = ('preco_total',)
     autocomplete_fields = ('item_de_servico',)
+
