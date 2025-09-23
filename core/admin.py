@@ -228,3 +228,4 @@ class ItemPedidoAdmin(ModelAdmin):
     readonly_fields = ('preco_total',)
     autocomplete_fields = ('item_de_servico',)
 
+
