@@ -33,13 +33,32 @@ class GroupAdmin(BaseGroupAdmin, ModelAdmin):
 # Inline para gerenciar os itens de pedido diretamente no pedido
 class ItemPedidoInline(StackedInline):
     model = ItemPedido
-    extra = 0  # Número de linhas extras para novos itens
+    extra = 0
     fields = [
-        ('item_de_servico',),  # Primeira linha
-        ('descricao', 'quantidade', 'preco_total'),   # Segunda linha
+        ('item_de_servico',),
+        ('descricao', 'quantidade', 'preco_total'),
     ]
     autocomplete_fields = ('item_de_servico',)
     readonly_fields = ('preco_total',)
+
+    def has_add_permission(self, request, obj=None):
+        # Permite adicionar itens apenas quando o pedido é novo
+        if obj and obj.pk:
+            return False
+        return True
+
+    def has_change_permission(self, request, obj=None):
+        # Impede editar os itens se o pedido já foi criado
+        if obj and obj.pk:
+            return False
+        return True
+
+    def has_delete_permission(self, request, obj=None):
+        # Impede apagar os itens se o pedido já foi criado
+        if obj and obj.pk:
+            return False
+        return True
+
 
 
 # Configuração do modelo Lavandaria no Admin
@@ -227,5 +246,6 @@ class ItemPedidoAdmin(ModelAdmin):
     list_filter = ('servico',)
     readonly_fields = ('preco_total',)
     autocomplete_fields = ('item_de_servico',)
+
 
 
